@@ -1,6 +1,6 @@
-# npm-audit-mcp
+# @xianguoji/npm-audit-mcp
 
-`npm-audit-mcp` 是一个基于 Node.js 的模型上下文协议 (Model Context Protocol, MCP) 服务，专为大语言模型（如 Claude、Trae 等）设计，用于自动化执行项目的 NPM 依赖安全审计。
+`@xianguoji/npm-audit-mcp` 是一个基于 Node.js 的模型上下文协议 (Model Context Protocol, MCP) 服务，专为大语言模型（如 Claude、Trae 等）设计，用于自动化执行项目的 NPM 依赖安全审计。
 
 ## 🌟 功能特性
 
@@ -34,22 +34,57 @@
 2. 导航到 **Features** -> **MCP Servers**
 3. 点击 **+ Add New MCP Server**
 4. 填写配置：
-   - **Name**: `npm-audit-mcp` (或任意名称)
-   - **Type**: `command`
-   - **Command**: `node`
-   - **Args**: `/绝对路径/到/你的/npm-audit/bin/mcp-server.js` (请替换为实际路径)
+
+```bash
+"mcpServers": {
+    "npm-audit-mcp": {
+      "command": "npx",
+      "args": ["-y", "-p", "@xianguoji/npm-audit-mcp", "npm-audit-server"]
+    },
+}
+```
 
 #### 在 Trae 中添加：
 
 1. 点击左侧活动栏的齿轮图标进入设置
 2. 找到 **MCP Servers** 配置项
-3. 添加一个本地 Server，配置与上述 Cursor 类似，指定 `node` 和 `bin/mcp-server.js` 的绝对路径。
+3. 添加一个本地 Server，配置与上述 Cursor 类似，指定 `node` 和 `$(npm root -g)/@xianguoji/npm-audit-mcp/bin/mcp-server.js`。
 
 配置完成后，你可以直接在聊天框中让 AI 助手：“帮我审计一下当前项目的 NPM 依赖漏洞”，AI 就会自动调用该工具。
 
-### 方式二：作为全局 CLI 命令使用 (推荐手动执行)
+### 方式二：作为全局 CLI 命令使用
 
-如果你希望在任何目录下都能快速运行该审计工具，可以通过 `npm link` 将其注册为全局命令。
+#### 2.1 全局安装（推荐）
+
+```bash
+npm i -g @xianguoji/npm-audit-mcp
+```
+
+然后你就可以在任何前端项目的根目录下，直接执行以下命令进行安全审计：
+
+```bash
+npm-audit-mcp
+```
+
+也可以显式指定要审计的项目路径：
+
+```bash
+npm-audit-mcp /path/to/your/project
+```
+
+#### 2.2 使用 npx（免安装）
+
+```bash
+npx @xianguoji/npm-audit-mcp
+```
+
+```bash
+npx @xianguoji/npm-audit-mcp /path/to/your/project
+```
+
+### 方式二（补充）：本地开发使用 npm link
+
+如果你在开发本项目，希望把它临时注册为全局命令（不发布到 npm），可以使用 `npm link`：
 
 1. 在当前项目根目录下执行：
    ```bash
@@ -66,7 +101,7 @@
 该项目也可作为独立的 Node.js 模块引入并调用：
 
 ```javascript
-import NpmAuditMCP from "./index.js";
+import NpmAuditMCP from "@xianguoji/npm-audit-mcp";
 
 // 初始化 MCP 实例
 const mcp = new NpmAuditMCP({
