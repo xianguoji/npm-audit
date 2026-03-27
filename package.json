@@ -1,8 +1,31 @@
 {
-  "name": "npm-audit",
+  "name": "@xianguoji/npm-audit-mcp",
   "version": "1.0.0",
-  "description": "基于 npm audit 的项目安全审计微程序",
+  "description": "基于 npm audit 的项目依赖安全审计工具（支持 CLI 与 MCP Server）",
+  "keywords": [
+    "npm",
+    "audit",
+    "security",
+    "vulnerability",
+    "mcp",
+    "cli"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xianguoji/npm-audit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xianguoji/npm-audit/issues"
+  },
+  "homepage": "https://github.com/xianguoji/npm-audit#readme",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
   "bin": {
     "npm-audit-mcp": "./bin/cli.js",
     "npm-audit-server": "./bin/mcp-server.js"
