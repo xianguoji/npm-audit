@@ -1,6 +1,6 @@
 {
   "name": "@xianguoji/npm-audit-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于 npm audit 的项目依赖安全审计工具（支持 CLI 与 MCP Server）",
   "keywords": [
     "npm",
