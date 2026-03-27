@@ -3,16 +3,21 @@
   "version": "1.0.0",
   "description": "基于 npm audit 的项目安全审计微程序",
   "main": "index.js",
+  "bin": {
+    "npm-audit-mcp": "./bin/cli.js",
+    "npm-audit-server": "./bin/mcp-server.js"
+  },
   "scripts": {
-    "start": "node index.js",
-    "audit": "node index.js"
+    "start": "node ./bin/cli.js",
+    "audit": "node ./bin/cli.js"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1",
     "axios": "^1.6.0",
     "rimraf": "^5.0.5"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "type": "module"
 }
